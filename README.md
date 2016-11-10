@@ -25,31 +25,36 @@ Untested on Windows and I have no interest is getting it to work on that.
 
 Tests specification is through a text file with the following formatting rules.
 
-* The '#' character is the start of a comment all text after that is ignored
-* a contiguous sequence of ',',whitespace is interpreted as single space.
-* level specification is
+1. The '#' character is the start of a comment all text after that is ignored
+1. a contiguous sequence of commas and whitespace characters, is interpreted as single work break.
+1. level (label for the test) specification is 
  * Level text
-* sum specification is
- * SumType, count, numbers, numbers, ...
-  * SumType is one of
-   * Multiply2
-   * Multiply3
-   * Divide2
-   * FractionOf
-   * PercentOf
-   * FractionOfFraction
-   * Cubed
-   * Squared
-   * PowerOf
-   * SquareRoot
-   * CubeRoot
-  * count is the number of times sum type is repeated
-  * numbers are one of
-   * a sequence, i.e  [number1, number2, number3, ......]
-   * a range (firstNumber, lastNumber, step)
-    * examples
-     * (1, 6, 1) expands to 1,2,3,4,5,6
-     * (1, 6, 2) expands to 1,3,5
+1. sum specification is
+ * Type, count, numbers, numbers, 
+
+Where
+
+* Type is one of
+ * Multiply2
+ * Multiply3
+ * Divide2
+ * FractionOf
+ * PercentOf
+ * FractionOfFraction
+ * Cubed
+ * Squared
+ * PowerOf
+ * SquareRoot
+ * CubeRoot
+* count is the number of times sum type is repeated
+* numbers are one of
+ * a sequence, i.e  [number1, number2, number3, ......]
+ * a range (firstNumber, lastNumber, step)
+
+For example
+
+   * (1, 6, 1) expands to 1,2,3,4,5,6
+   * (1, 6, 2) expands to 1,3,5
  
 To aid readability, you can add "labels" and write something like 
 * "Sum=Multiply2  Count= 11   Numbers= a=(11, 19) b=(11, 19, 1)"
