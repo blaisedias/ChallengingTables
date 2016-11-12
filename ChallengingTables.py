@@ -364,7 +364,7 @@ def substitute(line, test_lst, key, ix):
         txt = regex.sub(test_lst[ix][key].format(ixtxt), line)
         if debug:
             print >> sys.stderr, txt
-        return txt
+        return txt.encode('utf8')
 
     if fodt_re['SUM'].search(line):
         return do_subst(fodt_re['SUM']), ix + 1
@@ -372,7 +372,7 @@ def substitute(line, test_lst, key, ix):
         return sig, ix
     elif fodt_re['footer'].match(line):
         return footer, ix
-    elif fodt_re['level'].search(line):
+    elif fodt_re['level'].match(line):
         if leveltext is not None:
             return leveltext, ix
     return line, ix
@@ -486,18 +486,17 @@ if __name__ == '__main__':
 
     thismodule = sys.modules[__name__]
     test_spec, level = read_spec(options.spec)
-    print >> sys.stderr, test_spec
+    if debug:
+        for spec in test_spec:
+            print >> sys.stderr, '{type} repeated={count} number ranges={ranges}'.format(**spec)
 
-    if True:
-        from ChallengingTables_template import fodt
-    else:
-        # this isn't quite working :-(, get UnicodeDecodeError: when writing
-        import json
-        with open('ChallengingTables_template.json', "rb") as fp:
-            fodt = json.load(fp, encoding="utf-8")
+    import json
+    with open('ChallengingTables_template.json', "rb") as fp:
+        fodt = json.load(fp, encoding="utf-8")
+
     fodt_fmt = fodt['fmt']
     fodt_lines = fodt['lines']
-    fodt_re = {k: re.compile(fodt_lines[k]) for k in fodt_lines}
+    fodt_re = {k: re.compile(re.escape(fodt_lines[k])) for k in fodt_lines}
 
     for fname in fnames:
 
@@ -530,8 +529,7 @@ if __name__ == '__main__':
         tests.extend([blank.text(sums) for x in range(len(tests), 100)])
 
         ix = 0
-        import codecs
-        with codecs.open(testfile, 'wb') as fp:
+        with open(testfile, 'wb') as fp:
             for line in lines:
                 sline, ix = substitute(line, tests, 'sum', ix)
                 fp.write(sline)

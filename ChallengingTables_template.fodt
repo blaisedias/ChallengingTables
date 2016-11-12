@@ -324,7 +324,7 @@
     <table:table-column table:style-name="Table1.A" table:number-columns-repeated="5"/>
     <table:table-row>
      <table:table-cell table:style-name="Table1.A1" table:number-columns-spanned="5" office:value-type="string">
-      <text:p text:style-name="P20"><text:span text:style-name="T13">Challenging Tables– Stage #</text:span> <text:s text:c="19"/>Will you get a bronze silver or gold award?</text:p>
+      <text:p text:style-name="P20"><text:span text:style-name="T13">Challenging Tables - Stage #</text:span> <text:s text:c="19"/>Will you get a bronze silver or gold award?</text:p>
      </table:table-cell>
      <table:covered-table-cell/>
      <table:covered-table-cell/>

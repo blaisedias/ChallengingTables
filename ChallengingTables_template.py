@@ -30,7 +30,8 @@
 # EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 # ChallengingTables .fodt formatting strings
-# TODO: move to a text/JSON file which is read by ChallengingTables.py
+import json
+
 fodt = {
     'fmt': {
         'mul2': '<text:p text:style-name="P4">{}{} × {} = {}</text:p>',
@@ -46,7 +47,7 @@ fodt = {
 
         'sig': '      <text:p text:style-name="P24">{}</text:p>',
         'footer': '    <text:p text:style-name="P1">ID: {} <text:s text:c="10"/>Filename: {}<text:s text:c="10"/>{}</text:p>',
-        'level': '      <text:p text:style-name="P20"><text:span text:style-name="T13">Challenging Tables– Stage {}</text:span> <text:s text:c="19"/>Will you get a bronze silver or gold award?</text:p>',
+        'level': '      <text:p text:style-name="P20"><text:span text:style-name="T13">Challenging Tables - Stage {}</text:span> <text:s text:c="19"/>Will you get a bronze silver or gold award?</text:p>',
         'count': '<text:span text:style-name="T11">{}) </text:span>',
         'empty': '<text:p text:style-name="P2"></text:p>',
     },
@@ -58,10 +59,14 @@ fodt = {
         'SUM': '<text:p text:style-name="P2">__SUM__</text:p>',
 # level name
 #    'level': '<text:p text:style-name="P20"><text:span text:style-name="T13">Challenging Tables– Stage ',
-        'level': r'      <text:p text:style-name="P20"><text:span text:style-name="T13">Challenging Tables– Stage #</text:span> <text:s text:c="19"/>Will you get a bronze silver or gold award\?</text:p>',
+        'level': r'      <text:p text:style-name="P20"><text:span text:style-name="T13">Challenging Tables - Stage #</text:span> <text:s text:c="19"/>Will you get a bronze silver or gold award\?</text:p>',
         'sig': '      <text:p text:style-name="P24">XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX</text:p>',
 # page footer line
         'footer': '    <text:p text:style-name="P1">XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX</text:p>',
 
     }
 }
+
+if __name__ == '__main__':
+    with open('ChallengingTables_template.json', 'wb') as fp:
+        json.dump(fodt, fp, encoding='utf-8', indent=1)

@@ -1,25 +1,25 @@
 {
  "fmt": {
-     "mul2": "<text:p text:style-name=\"P4\">{}{} \u00d7 {} = {}</text:p>", 
-     "mul3": "<text:p text:style-name=\"P4\">{}{} \u00d7 {} \u00d7 {} = {} </text:p>", 
-     "div": "<text:p text:style-name=\"P4\">{}{} \u00f7 {} = {}</text:p>", 
-     "percent_of": "<text:p text:style-name=\"P5\">{}{}%<text:span text:style-name=\"T11\"> of </text:span>{} = {}</text:p>", 
-     "frac_of": "<text:p text:style-name=\"P5\">{}<text:span text:style-name=\"T1\">{}</text:span>/<text:span text:style-name=\"T7\">{}</text:span><text:span text:style-name=\"T11\"> of </text:span>{} = {}</text:p>", 
-     "frac_frac": "<text:p text:style-name=\"P5\">{}<text:span text:style-name=\"T1\">{}</text:span><text:span text:style-name=\"T3\">/</text:span><text:span text:style-name=\"T8\">{}</text:span><text:span text:style-name=\"T4\"> of </text:span><text:span text:style-name=\"T10\"><text:span text:style-name=\"T1\">{}</text:span></text:span><text:span text:style-name=\"T3\">/</text:span><text:span text:style-name=\"T8\">{}</text:span><text:span text:style-name=\"T3\">  = {}</text:span></text:p>", 
-     "ans_frac_frac": "<text:span text:style-name=\"T1\">{}</text:span><text:span text:style-name=\"T3\">/</text:span><text:span text:style-name=\"T8\">{}</text:span>", 
-     "power": "<text:p text:style-name=\"P4\">{}{}<text:span text:style-name=\"T1\">{}</text:span><text:span text:style-name=\"T2\"> = {}</text:span></text:p>", 
-     "sqrt": "<text:p text:style-name=\"P2\">{}\u221a{} = {}</text:p>", 
-     "cubert": "<text:p text:style-name=\"P5\">{}<text:span text:style-name=\"T1\">3</text:span>\u221a{} = {}</text:p>", 
-     "sig": "      <text:p text:style-name=\"P24\">{}</text:p>", 
-     "footer": "    <text:p text:style-name=\"P1\">ID: {} <text:s text:c=\"10\"/>Filename: {}<text:s text:c=\"10\"/>{}</text:p>", 
-     "level": "      <text:p text:style-name=\"P20\"><text:span text:style-name=\"T13\">Challenging Tables\u2013 Stage {}</text:span> <text:s text:c=\"19\"/>Will you get a bronze silver or gold award?</text:p>", 
-     "count": "<text:span text:style-name=\"T11\">{}) </text:span>", 
-     "empty": "<text:p text:style-name=\"P2\"></text:p>"
+  "power": "<text:p text:style-name=\"P4\">{}{}<text:span text:style-name=\"T1\">{}</text:span><text:span text:style-name=\"T2\"> = {}</text:span></text:p>", 
+  "cubert": "<text:p text:style-name=\"P5\">{}<text:span text:style-name=\"T1\">3</text:span>\u221a{} = {}</text:p>", 
+  "frac_frac": "<text:p text:style-name=\"P5\">{}<text:span text:style-name=\"T1\">{}</text:span><text:span text:style-name=\"T3\">/</text:span><text:span text:style-name=\"T8\">{}</text:span><text:span text:style-name=\"T4\"> of </text:span><text:span text:style-name=\"T10\"><text:span text:style-name=\"T1\">{}</text:span></text:span><text:span text:style-name=\"T3\">/</text:span><text:span text:style-name=\"T8\">{}</text:span><text:span text:style-name=\"T3\">  = {}</text:span></text:p>", 
+  "ans_frac_frac": "<text:span text:style-name=\"T1\">{}</text:span><text:span text:style-name=\"T3\">/</text:span><text:span text:style-name=\"T8\">{}</text:span>", 
+  "mul2": "<text:p text:style-name=\"P4\">{}{} \u00d7 {} = {}</text:p>", 
+  "mul3": "<text:p text:style-name=\"P4\">{}{} \u00d7 {} \u00d7 {} = {} </text:p>", 
+  "count": "<text:span text:style-name=\"T11\">{}) </text:span>", 
+  "footer": "    <text:p text:style-name=\"P1\">ID: {} <text:s text:c=\"10\"/>Filename: {}<text:s text:c=\"10\"/>{}</text:p>", 
+  "level": "      <text:p text:style-name=\"P20\"><text:span text:style-name=\"T13\">Challenging Tables - Stage {}</text:span> <text:s text:c=\"19\"/>Will you get a bronze silver or gold award?</text:p>",
+  "sqrt": "<text:p text:style-name=\"P2\">{}\u221a{} = {}</text:p>", 
+  "percent_of": "<text:p text:style-name=\"P5\">{}{}%<text:span text:style-name=\"T11\"> of </text:span>{} = {}</text:p>", 
+  "sig": "      <text:p text:style-name=\"P24\">{}</text:p>", 
+  "frac_of": "<text:p text:style-name=\"P5\">{}<text:span text:style-name=\"T1\">{}</text:span>/<text:span text:style-name=\"T7\">{}</text:span><text:span text:style-name=\"T11\"> of </text:span>{} = {}</text:p>", 
+  "div": "<text:p text:style-name=\"P4\">{}{} \u00f7 {} = {}</text:p>", 
+  "empty": "<text:p text:style-name=\"P2\"></text:p>"
  }, 
  "lines": {
-     "SUM": "      <text:p text:style-name=\"P2\">__SUM__</text:p>", 
-     "level": "      <text:p text:style-name=\"P20\"><text:span text:style-name=\"T13\">Challenging Tables\u2013 Stage #</text:span> <text:s text:c=\"19\"/>Will you get a bronze silver or gold award?</text:p>", 
-     "sig": "      <text:p text:style-name=\"P24\">XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX</text:p>", 
-     "footer": "    <text:p text:style-name=\"P1\">XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX</text:p>"
+  "SUM": "<text:p text:style-name=\"P2\">__SUM__</text:p>", 
+  "footer": "    <text:p text:style-name=\"P1\">XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX</text:p>", 
+  "sig": "      <text:p text:style-name=\"P24\">XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX</text:p>", 
+  "level": "      <text:p text:style-name=\"P20\"><text:span text:style-name=\"T13\">Challenging Tables - Stage #</text:span> <text:s text:c=\"19\"/>Will you get a bronze silver or gold award?</text:p>"
  }
 }
