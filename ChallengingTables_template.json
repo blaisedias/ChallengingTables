@@ -11,6 +11,7 @@
   "level": "      <text:p text:style-name=\"P20\"><text:span text:style-name=\"T13\">Challenging Tables - Stage {}</text:span> <text:s text:c=\"19\"/>Will you get a bronze silver or gold award?</text:p>",
   "sqrt": "<text:p text:style-name=\"P2\">{}\u221a{} = {}</text:p>", 
   "percent_of": "<text:p text:style-name=\"P5\">{}{}%<text:span text:style-name=\"T11\"> of </text:span>{} = {}</text:p>", 
+  "percent_off": "<text:p text:style-name=\"P5\">{}{}%<text:span text:style-name=\"T11\"> off </text:span>{} = {}</text:p>", 
   "sig": "      <text:p text:style-name=\"P24\">{}</text:p>", 
   "frac_of": "<text:p text:style-name=\"P5\">{}<text:span text:style-name=\"T1\">{}</text:span>/<text:span text:style-name=\"T7\">{}</text:span><text:span text:style-name=\"T11\"> of </text:span>{} = {}</text:p>", 
   "div": "<text:p text:style-name=\"P4\">{}{} \u00f7 {} = {}</text:p>", 

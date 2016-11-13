@@ -36,7 +36,7 @@
 # For increased flexibilty the script doesn't police repeat sum specifications,
 # this makes it possible to create test sums of the same type but with different
 # ranges which can be useful.
-Level:= 14-beta 
+Level:= 14
 
 # a × b
 Type:= Multiply2, Count:= 11,  Numbers:= a=(11, 19) b=(11, 19, 1) 
@@ -53,7 +53,11 @@ Type:= FractionOf, Count:= 8, Numbers:= a=(1, 8, 1) b=(2, 10, 1) c=(2, 12, 1)
 # C is a number in the range (4 to 120) which is a multiple of b
 
 # a % of b
-Type:= PercentOf, Count:= 13, Numbers:= a=(10, 200, 5) b=(1, 200, 1)
+Type:= PercentOf, Count:= 6, Numbers:= a=(10, 200, 5) b=(1, 200, 1)
+# a expands to (10, 15, 20, 25, ... 100)
+
+# b - (a % of b)
+Type:= PercentOff, Count:= 7, Numbers:= a=[10, 15, 25, 50, 75] b=(1, 200, 1)
 # a expands to (10, 15, 20, 25, ... 100)
 
 # (a/b) × (c/d)

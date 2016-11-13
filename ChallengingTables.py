@@ -131,6 +131,10 @@ class NumberSelector:
         return self.numbers[ix][0]
 
 
+    def select_nc(self):
+        ix = randint(0, len(self.numbers) - 1)
+        return self.numbers[ix][0]
+
 class SumBase:
     def __init__(self, *args):
         # Subclasses take a number of range specifications
@@ -245,14 +249,7 @@ class PercentOf(SumBase):
 
     def text(self, sums):
         m1 = self.m[0].select()
-        m2 = randint(1, 200)  # FIXME: derive from param
-        while True:
-            if 0 == ((m1 * m2) % 100):
-                if (m2 < 100):
-                    break
-                if ((m2 % 10) == 0):
-                    break
-            m2 = randint(1, 200)  # FIXME: derive from param
+        m2 = self.m[1].select_nc()
 
         if debug:
             print >> sys.stderr, "{}% of {} {}".format(m1, m2, ((m1 * m2) / 100))
@@ -264,6 +261,25 @@ class PercentOf(SumBase):
         return {
             'sum': the_sum,
             'ans': fodt_fmt['percent_of'].format("{}", m1, m2, (m1 * m2) / 100),
+        }
+
+
+class PercentOff(SumBase):
+
+    def text(self, sums):
+        m1 = self.m[0].select()
+        m2 = self.m[1].select_nc()
+
+        if debug:
+            print >> sys.stderr, "{}% off {} {}".format(m1, m2, m2 - ((m1 * m2) / 100))
+
+        the_sum = fodt_fmt['percent_off'].format("{}", m1, m2, '')
+        if the_sum in sums:
+            return self.text(sums)
+        sums.append(the_sum)
+        return {
+            'sum': the_sum,
+            'ans': fodt_fmt['percent_of'].format("{}", m1, m2, m2 - ((m1 * m2) / 100)),
         }
 
 
@@ -390,6 +406,7 @@ def read_spec(spec_name):
         'Divide2',
         'FractionOf',
         'PercentOf',
+        'PercentOff',
         'FractionOfFraction',
         'Squared',
         'Cubed',
@@ -413,7 +430,7 @@ def read_spec(spec_name):
         hr_label))
 
     test_spec = []
-    level = None
+    level = '-'
     for line in lines:
         s = re_level.match(line)
         if s:
