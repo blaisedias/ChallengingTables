@@ -40,6 +40,7 @@ Where
  * Divide2
  * FractionOf
  * PercentOf
+ * PercentOff
  * FractionOfFraction
  * Cubed
  * Squared
@@ -65,3 +66,6 @@ a ':' or '='.
 For increased flexibilty the script doesn't police repeat sum specifications,
 this makes it possible to create test sums of the same type but with different
 ranges which can be useful.
+
+Read level14spec.txt for complete syntax for each sum Type.
+
