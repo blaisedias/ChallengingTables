@@ -53,11 +53,11 @@ Type:= FractionOf, Count:= 8, Numbers:= a=(1, 8, 1) b=(2, 10, 1) c=(2, 12, 1)
 # C is a number in the range (4 to 120) which is a multiple of b
 
 # a % of b
-Type:= PercentOf, Count:= 6, Numbers:= a=(10, 200, 5) b=(1, 200, 1)
+Type:= PercentOf, Count:= 13, Numbers:= a=(10, 200, 5) b=(1, 200, 1)
 # a expands to (10, 15, 20, 25, ... 100)
 
 # b - (a % of b)
-Type:= PercentOff, Count:= 7, Numbers:= a=[10, 15, 25, 50, 75] b=(1, 200, 1)
+Type:= PercentOff, Count:= 4, Numbers:= a=[10, 15, 25, 50, 75] b=(1, 200, 1)
 # a expands to (10, 15, 20, 25, ... 100)
 
 # (a/b) × (c/d)
@@ -81,6 +81,6 @@ Type:= SquareRoot, Count:= 0, Numbers:= a=(2, 10, 1)
 Type:= CubeRoot, Count:= 1, Numbers:= a=(2, 8, 1)
 # a expands to (8, 27, 125, ... 8000)
 
-# 70 tests upto here, repeat multiplication by 2 with a different range.
+# 74 tests upto here, repeat multiplication by 2 with a different range.
 # a × b
-Type:= Multiply2, Count:= 30,  Numbers:= a=(2, 12) b=(2, 12, 1) 
+Type:= Multiply2, Count:= 26,  Numbers:= a=(2, 12) b=(2, 12, 1) 
