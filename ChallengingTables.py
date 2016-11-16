@@ -130,10 +130,10 @@ class NumberSelector:
             ix = randint(0, len(self.numbers) - 1)
         return self.numbers[ix][0]
 
-
     def select_nc(self):
         ix = randint(0, len(self.numbers) - 1)
         return self.numbers[ix][0]
+
 
 class SumBase:
     def __init__(self, *args):
@@ -143,6 +143,27 @@ class SumBase:
         self.m = []
         for arg in args:
             self.m.append(NumberSelector(arg))
+        self.recursion_count = 0
+        self.available = True
+
+    def recurse(self, sums):
+        v = None
+        if self.available:
+            self.recursion_count += 1
+            # We are exceeding recursion depths!
+            # The way we select random numbers means that we
+            # may generate the same sums inside the recursion
+            # multiple times, so sadly recursion depth cannot be
+            # used to determine that all possible combinations
+            # of numbers have been used.
+            # Stop crashing by limiting recursion depth to 100.
+            if self.recursion_count <= 200:
+                v = self.text(sums)
+            else:
+                self.available = False
+                print >> sys.stderr, "All number combinations have been used up!"
+            self.recursion_count -= 1
+        return v
 
 
 class SquareRoot(SumBase):
@@ -151,7 +172,7 @@ class SquareRoot(SumBase):
         m1 = self.m[0].select()
         the_sum = fodt_fmt['sqrt'].format("{}", m1, '')
         if the_sum in sums:
-            return self.text(sums)
+            return self.recurse(sums)
         sums.append(the_sum)
         return {
             'sum': the_sum,
@@ -165,7 +186,7 @@ class CubeRoot(SumBase):
         m1 = self.m[0].select()
         the_sum = fodt_fmt['cubert'].format("{}", m1 ** 3, '')
         if the_sum in sums:
-            return self.text(sums)
+            return self.recurse(sums)
         sums.append(the_sum)
         return {
             'sum': the_sum,
@@ -180,7 +201,7 @@ class Multiply2(SumBase):
         m2 = self.m[1].select()
         the_sum = fodt_fmt['mul2'].format("{}", m1, m2, '')
         if the_sum in sums:
-            return self.text(sums)
+            return self.recurse(sums)
         sums.append(the_sum)
         return {
             'sum': the_sum,
@@ -196,7 +217,7 @@ class Multiply3(SumBase):
         m3 = self.m[2].select()
         the_sum = fodt_fmt['mul3'].format("{}", m1, m2, m3, '')
         if the_sum in sums:
-            return self.text(sums)
+            return self.recurse(sums)
         sums.append(the_sum)
         return {
             'sum': the_sum,
@@ -211,7 +232,7 @@ class Divide2(SumBase):
         m2 = self.m[1].select()
         the_sum = fodt_fmt['div'].format("{}", m1 * m2, m2, '')
         if the_sum in sums:
-            return self.text(sums)
+            return self.recurse(sums)
         sums.append(the_sum)
         return {
             'sum': the_sum,
@@ -237,7 +258,7 @@ class FractionOf(SumBase):
         a = int(a)
         the_sum = fodt_fmt['frac_of'].format("{}", m1, m2, m3, '')
         if the_sum in sums:
-            return self.text(sums)
+            return self.recurse(sums)
         sums.append(the_sum)
         return {
             'sum': the_sum,
@@ -256,7 +277,7 @@ class PercentOf(SumBase):
 
         the_sum = fodt_fmt['percent_of'].format("{}", m1, m2, '')
         if the_sum in sums:
-            return self.text(sums)
+            return self.recurse(sums)
         sums.append(the_sum)
         return {
             'sum': the_sum,
@@ -275,7 +296,7 @@ class PercentOff(SumBase):
 
         the_sum = fodt_fmt['percent_off'].format("{}", m1, m2, '')
         if the_sum in sums:
-            return self.text(sums)
+            return self.recurse(sums)
         sums.append(the_sum)
         return {
             'sum': the_sum,
@@ -306,7 +327,7 @@ class FractionOfFraction(SumBase):
         the_sum = fodt_fmt['frac_frac'].format("{}", m1, m2, m3, m4, '')
         the_ans = fodt_fmt['ans_frac_frac'].format(n, d)
         if the_sum in sums:
-            return self.text(sums)
+            return self.recurse(sums)
         sums.append(the_sum)
         return {
             'sum': the_sum,
@@ -323,7 +344,7 @@ class PowerOf(SumBase):
             print >> sys.stderr, "{}^{}".format(m1, m2)
         the_sum = fodt_fmt['power'].format("{}", m1, m2, '')
         if the_sum in sums:
-            return self.text(sums)
+            return self.recurse(sums)
         sums.append(the_sum)
         return {
             'sum': the_sum,
@@ -340,7 +361,7 @@ class Squared(SumBase):
             print >> sys.stderr, "{}^{}".format(m1, m2)
         the_sum = fodt_fmt['power'].format("{}", m1, m2, '')
         if the_sum in sums:
-            return self.text(sums)
+            return self.recurse(sums)
         sums.append(the_sum)
         return {
             'sum': the_sum,
@@ -357,7 +378,7 @@ class Cubed(SumBase):
             print >> sys.stderr, "{}^{}".format(m1, m2)
         the_sum = fodt_fmt['power'].format("{}", m1, m2, '')
         if the_sum in sums:
-            return self.text(sums)
+            return self.recurse(sums)
         sums.append(the_sum)
         return {
             'sum': the_sum,
@@ -476,7 +497,7 @@ if __name__ == '__main__':
 
     from argparse import ArgumentParser
     parser = ArgumentParser()
-    parser.add_argument("names", nargs='*', action="store", default=['L14_{}'.format(str(int(time.time())))])
+    parser.add_argument("names", nargs='*', action="store", default=['CT_{}'.format(str(int(time.time())))])
     parser.add_argument("-p", "--print", dest="do_print", action="store_true", default=False,
                         help="Print to default printer")
     parser.add_argument("-s", "--series", dest="series", action="store", type=int, default=0,
@@ -489,6 +510,10 @@ if __name__ == '__main__':
                         help="Print creation date")
     parser.add_argument("--specification", dest="spec", action="store",
                         required=True, help="Test specification text, e.g. level14spec.txt")
+    parser.add_argument("--testfolder", dest="testdir", action="store", default='./',
+                        help="Where to store the generated test sheets.")
+    parser.add_argument("--ansfolder, answers", dest="ansdir", action="store", default=None,
+                        help="Where to store the generated answer sheets.")
 
     options = parser.parse_args()
 
@@ -515,10 +540,16 @@ if __name__ == '__main__':
     fodt_lines = fodt['lines']
     fodt_re = {k: re.compile(re.escape(fodt_lines[k])) for k in fodt_lines}
 
+    if options.ansdir is None:
+        options.ansdir = os.path.join(options.testdir, 'answers')
+    if not os.path.isdir(options.testdir):
+        os.makedirs(options.testdir)
+    if not os.path.isdir(options.ansdir):
+        os.makedirs(options.ansdir)
     for fname in fnames:
 
-        testfile = '{}.fodt'.format(fname)
-        ansfile = 'ANS.{}.fodt'.format(fname)
+        testfile = '{}.fodt'.format(os.path.join(options.testdir, fname))
+        ansfile = '{}.answers.fodt'.format(os.path.join(options.ansdir, fname))
         uuidv = str(uuid.uuid4())
         dt = ''
         if options.printdate:
@@ -534,13 +565,15 @@ if __name__ == '__main__':
         tests = []
         for spec in test_spec:
             obj = getattr(thismodule, spec['type'])(*spec['ranges'])
-            tests.extend([obj.text(sums) for i in range(spec['count'])])
-
+            tests.extend([tst for tst in [obj.text(sums) for i in range(spec['count'])] if tst is not None])
+        tests = sorted(tests)
         if options.shuffle:
             random_shuffle(tests)
 
         if (len(tests) > 100):
             print >> sys.stderr,  fmt_warn_gt_100_tests.format(len(tests))
+
+        # print >> sys.stderr,  (len(tests))
 
         blank = Blank()
         tests.extend([blank.text(sums) for x in range(len(tests), 100)])
@@ -560,7 +593,9 @@ if __name__ == '__main__':
         if options.do_print:
             os.system("soffice --headless -p {}".format(testfile))
 
-        if 0 == os.system("soffice --headless --convert-to pdf {}".format(testfile)) \
-                and 0 == os.system("soffice --headless --convert-to pdf {}".format(ansfile)):
+        # print >> sys.stderr, "soffice --headless --convert-to pdf {} --outdir {}".format(testfile, options.testdir)
+        if 0 == os.system("soffice --headless --convert-to pdf {} --outdir {}".format(testfile, options.testdir)):
             os.system("rm {}".format(testfile))
+        # print >> sys.stderr, "soffice --headless --convert-to pdf {} --outdir {}".format(ansfile, options.ansdir)
+        if 0 == os.system("soffice --headless --convert-to pdf {} --outdir {}".format(ansfile, options.ansdir)):
             os.system("rm {}".format(ansfile))
