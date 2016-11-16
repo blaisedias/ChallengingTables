@@ -70,14 +70,14 @@ this makes it possible to create test sums of the same type but with different
 ranges which can be useful.
 
 The tests are focussed on generating tests for whole numbers so the formula used
-to generate the sum and therefore the range of numbers to be specified 
+to generate the tests and therefore the range of numbers to be specified 
 may not be immediately obvious.
 
-For example to get a whole number division given numbers a and b, the sum generated is
+For example to get a whole number division given numbers a and b, the formula used is
 
-* (a x b)/b
- * for example if a = 3 and b = 5 then the sum generated is 
-  * 15 / 3
+* (a x b) / b
+ * for example if a = 3 and b = 5 then the generated test is 
+  * 15 / 3 =
 
 Read level14spec.txt for the complete syntax for each sum Type and the formulae used.
 
