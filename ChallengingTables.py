@@ -271,6 +271,8 @@ class PercentOf(SumBase):
     def text(self, sums):
         m1 = self.m[0].select()
         m2 = self.m[1].select_nc()
+        while((m1 * m2) % 100):
+            m2 = self.m[1].select_nc()
 
         if debug:
             print >> sys.stderr, "{}% of {} {}".format(m1, m2, ((m1 * m2) / 100))
@@ -281,7 +283,7 @@ class PercentOf(SumBase):
         sums.append(the_sum)
         return {
             'sum': the_sum,
-            'ans': fodt_fmt['percent_of'].format("{}", m1, m2, (m1 * m2) / 100),
+            'ans': fodt_fmt['percent_of'].format("{}", m1, m2, (float(m1) * float(m2)) / 100),
         }
 
 
@@ -290,6 +292,9 @@ class PercentOff(SumBase):
     def text(self, sums):
         m1 = self.m[0].select()
         m2 = self.m[1].select_nc()
+
+        while((m1 * m2) % 100):
+            m2 = self.m[1].select_nc()
 
         if debug:
             print >> sys.stderr, "{}% off {} {}".format(m1, m2, m2 - ((m1 * m2) / 100))
@@ -300,7 +305,7 @@ class PercentOff(SumBase):
         sums.append(the_sum)
         return {
             'sum': the_sum,
-            'ans': fodt_fmt['percent_of'].format("{}", m1, m2, m2 - ((m1 * m2) / 100)),
+            'ans': fodt_fmt['percent_off'].format("{}", m1, m2, float(m2) - ((float(m1) * float(m2)) / 100)),
         }
 
 
@@ -500,6 +505,8 @@ if __name__ == '__main__':
     parser.add_argument("names", nargs='*', action="store", default=['CT_{}'.format(str(int(time.time())))])
     parser.add_argument("-p", "--print", dest="do_print", action="store_true", default=False,
                         help="Print to default printer")
+    parser.add_argument("--printer", dest="printer", action="store", default=None,
+                        help="Print to named printer")
     parser.add_argument("-s", "--series", dest="series", action="store", type=int, default=0,
                         help="Generate a series of tests")
     parser.add_argument("--template", dest="template", action="store", default="ChallengingTables_template.fodt",
@@ -590,7 +597,9 @@ if __name__ == '__main__':
                 sline, ix = substitute(line, tests, 'ans', ix)
                 fp.write(sline)
 
-        if options.do_print:
+        if options.printer:
+            os.system("soffice --headless --pt {}".format(options.printer, testfile))
+        elif options.do_print:
             os.system("soffice --headless -p {}".format(testfile))
 
         # print >> sys.stderr, "soffice --headless --convert-to pdf {} --outdir {}".format(testfile, options.testdir)
