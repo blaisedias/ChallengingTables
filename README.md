@@ -51,10 +51,16 @@ Where
  * CubeRoot
 * count is the number of times sum type is repeated in the test.
 * numbers are the operands for each sum, and are one of
- * a sequence, i.e  [number1, number2, number3, ......]
- * a range (firstNumber, lastNumber, step)
+ * set: [number1, number2, number3, ......]
+ * range: (firstNumber, lastNumber, step)
 
-For example
+Examples of sets:
+
+   * [1, 2, 3, 4, 5, 6]
+   * [1, 3, 5]
+   * [89, 79, 99]
+
+Examples of ranges:
 
    * (1, 6, 1) expands to 1,2,3,4,5,6
    * (1, 6, 2) expands to 1,3,5
