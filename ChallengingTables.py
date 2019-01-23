@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 # -*- coding: utf-8 -*-
 # Copyright (c) <2016>, <Blaise Dias>
 # All rights reserved.
@@ -545,25 +545,26 @@ if __name__ == '__main__':
 
     from argparse import ArgumentParser
     parser = ArgumentParser()
-    parser.add_argument("names", nargs='*', action="store", default=['CT_{}'.format(str(int(time.time())))])
+    parser.add_argument("--specification", dest="spec", action="store",
+                        required=True, help="Test specification text, e.g. level14spec.txt")
+    parser.add_argument("names", nargs='*', action="store", default=['CT_{}'.format(str(int(time.time())))],
+                        help="Default name is CT_xxxxxxxxxx, where xxxxxxxxxx is the timestamp number")
     parser.add_argument("-p", "--print", dest="do_print", action="store_true", default=False,
                         help="Print to default printer")
     parser.add_argument("--printer", dest="printer", action="store", default=None,
-                        help="Print to named printer")
+                        help="Print to named printer.")
     parser.add_argument("-s", "--series", dest="series", action="store", type=int, default=0,
-                        help="Generate a series of tests")
+                        help="Generate a series of tests for a level. default value is 0")
     parser.add_argument("--template", dest="template", action="store", default="ChallengingTables_template.fodt",
                         help="Name of test template file, (change with care)")
     parser.add_argument("--shuffle", dest="shuffle", action="store_true", default=False,
                         help="Shuffle the list of tests")
     parser.add_argument("--date", dest="printdate", action="store_true", default=False,
                         help="Print creation date")
-    parser.add_argument("--specification", dest="spec", action="store",
-                        required=True, help="Test specification text, e.g. level14spec.txt")
-    parser.add_argument("--testfolder", dest="testdir", action="store", default='./',
-                        help="Where to store the generated test sheets.")
-    parser.add_argument("--ansfolder, answers", dest="ansdir", action="store", default=None,
-                        help="Where to store the generated answer sheets.")
+    parser.add_argument("--testfolder", dest="testdir", action="store", default='tests',
+                        help="Where to store the generated test sheets. Default folder is tests.")
+    parser.add_argument("--ansfolder", dest="ansdir", action="store", default=None,
+                        help="Where to store the generated answer sheets. Default folder is <TESTDIR>/answers.")
 
     options = parser.parse_args()
 
