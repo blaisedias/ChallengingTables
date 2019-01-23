@@ -177,6 +177,7 @@ class SquareRoot(SumBase):
         return {
             'sum': the_sum,
             'ans': fodt_fmt['sqrt'].format("{}", m1, int(math.sqrt(m1))),
+            'ansonly': fodt_fmt['ansonly'].format("{}", int(math.sqrt(m1))),
         }
 
 
@@ -191,6 +192,7 @@ class CubeRoot(SumBase):
         return {
             'sum': the_sum,
             'ans': fodt_fmt['cubert'].format("{}", m1 ** 3, m1),
+            'ansonly': fodt_fmt['ansonly'].format("{}", m1),
         }
 
 
@@ -206,6 +208,7 @@ class Multiply2(SumBase):
         return {
             'sum': the_sum,
             'ans': fodt_fmt['mul2'].format("{}", m1, m2, m1 * m2),
+            'ansonly': fodt_fmt['ansonly'].format("{}", m1 * m2),
         }
 
 
@@ -222,6 +225,7 @@ class Multiply3(SumBase):
         return {
             'sum': the_sum,
             'ans': fodt_fmt['mul3'].format("{}", m1, m2, m3,  m1 * m2 * m3),
+            'ansonly': fodt_fmt['ansonly'].format("{}", m1 * m2 * m3),
         }
 
 
@@ -237,6 +241,7 @@ class Divide2(SumBase):
         return {
             'sum': the_sum,
             'ans': fodt_fmt['div'].format("{}", m1 * m2, m2, m1),
+            'ansonly': fodt_fmt['ansonly'].format("{}", m1),
         }
 
 
@@ -263,7 +268,8 @@ class FractionOf(SumBase):
         sums.append(the_sum)
         return {
             'sum': the_sum,
-            'ans': fodt_fmt['frac_of'].format("{}", m1, m2, m3, a)
+            'ans': fodt_fmt['frac_of'].format("{}", m1, m2, m3, a),
+            'ansonly': fodt_fmt['ansonly'].format("{}", a),
         }
 
 
@@ -285,7 +291,8 @@ class FractionOfMul(SumBase):
         sums.append(the_sum)
         return {
             'sum': the_sum,
-            'ans': fodt_fmt['frac_of_mul'].format("{}", m1, m2, m3, m4, a)
+            'ans': fodt_fmt['frac_of_mul'].format("{}", m1, m2, m3, m4, a),
+            'ansonly': fodt_fmt['ansonly'].format("{}", a),
         }
 
 
@@ -307,6 +314,7 @@ class PercentOf(SumBase):
         return {
             'sum': the_sum,
             'ans': fodt_fmt['percent_of'].format("{}", m1, m2, (float(m1) * float(m2)) / 100),
+            'ansonly': fodt_fmt['ansonly'].format("{}", (float(m1) * float(m2)) / 100),
         }
 
 
@@ -329,6 +337,7 @@ class PercentOff(SumBase):
         return {
             'sum': the_sum,
             'ans': fodt_fmt['percent_off'].format("{}", m1, m2, float(m2) - ((float(m1) * float(m2)) / 100)),
+            'ansonly': fodt_fmt['ansonly'].format("{}", float(m2) - ((float(m1) * float(m2)) / 100)),
         }
 
 
@@ -359,7 +368,8 @@ class FractionOfFraction(SumBase):
         sums.append(the_sum)
         return {
             'sum': the_sum,
-            'ans': fodt_fmt['frac_frac'].format("{}", m1, m2, m3, m4, the_ans)
+            'ans': fodt_fmt['frac_frac'].format("{}", m1, m2, m3, m4, the_ans),
+            'ansonly': fodt_fmt['ansonly'].format("{}", the_ans),
         }
 
 
@@ -377,6 +387,7 @@ class PowerOf(SumBase):
         return {
             'sum': the_sum,
             'ans': fodt_fmt['power'].format("{}", m1, m2, int(math.pow(m1, m2))),
+            'ansonly': fodt_fmt['ansonly'].format("{}", int(math.pow(m1, m2))),
         }
 
 
@@ -395,6 +406,7 @@ class MulPowerOf(SumBase):
         return {
             'sum': the_sum,
             'ans': fodt_fmt['mul_power_of'].format("{}", m1, m2, m3, m1 * int(math.pow(m2, m3))),
+            'ansonly': fodt_fmt['ansonly'].format("{}", m1 * int(math.pow(m2, m3))),
         }
 
 
@@ -412,6 +424,7 @@ class Squared(SumBase):
         return {
             'sum': the_sum,
             'ans': fodt_fmt['power'].format("{}", m1, m2, int(math.pow(m1, m2))),
+            'ansonly': fodt_fmt['ansonly'].format("{}", int(math.pow(m1, m2))),
         }
 
 
@@ -429,6 +442,7 @@ class Cubed(SumBase):
         return {
             'sum': the_sum,
             'ans': fodt_fmt['power'].format("{}", m1, m2, int(math.pow(m1, m2))),
+            'ansonly': fodt_fmt['ansonly'].format("{}", int(math.pow(m1, m2))),
         }
 
 
@@ -437,7 +451,8 @@ class Blank(SumBase):
     def text(self, sums):
         return {
             'sum': fodt_fmt['empty'],
-            'ans': fodt_fmt['empty']
+            'ans': fodt_fmt['empty'],
+            'ansonly': fodt_fmt['empty']
         }
 
 
@@ -601,6 +616,7 @@ if __name__ == '__main__':
 
         testfile = '{}.fodt'.format(os.path.join(options.testdir, fname))
         ansfile = '{}.answers.fodt'.format(os.path.join(options.ansdir, fname))
+        ansonlyfile = '{}.answers.only.fodt'.format(os.path.join(options.ansdir, fname))
         uuidv = str(uuid.uuid4())
         dt = ''
         if options.printdate:
@@ -641,6 +657,12 @@ if __name__ == '__main__':
                 sline, ix = substitute(line, tests, 'ans', ix)
                 fp.write(sline)
 
+        ix = 0
+        with open(ansonlyfile, "wb") as fp:
+            for line in lines:
+                sline, ix = substitute(line, tests, 'ansonly', ix)
+                fp.write(sline)
+
         if options.printer:
             os.system("soffice --headless --pt {}".format(options.printer, testfile))
         elif options.do_print:
@@ -652,3 +674,5 @@ if __name__ == '__main__':
         # print >> sys.stderr, "soffice --headless --convert-to pdf {} --outdir {}".format(ansfile, options.ansdir)
         if 0 == os.system("soffice --headless --convert-to pdf {} --outdir {}".format(ansfile, options.ansdir)):
             os.system("rm {}".format(ansfile))
+        if 0 == os.system("soffice --headless --convert-to pdf {} --outdir {}".format(ansonlyfile, options.ansdir)):
+            os.system("rm {}".format(ansonlyfile))
