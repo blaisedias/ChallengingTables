@@ -66,7 +66,7 @@ Examples of ranges:
    * (1, 6, 2) expands to 1,3,5
  
 To aid readability, you can add "labels" and write something like 
-* "Sum=Multiply2  Count= 11   Numbers= a=(11, 19) b=(11, 19, 1)"
+* "Sum=Multiply2  Count= 11   Numbers= a=(11, 19, 1) b=(11, 19, 1)"
 * "Type:=Multiply2  Repeat:= 11   Ranges:= a=(11, 19) b=(11, 19, 1)"
 the "labels" are ignored, and should be alphabets and end with
 a ':' or '='.

@@ -15,6 +15,8 @@
   "sig": "      <text:p text:style-name=\"P24\">{}</text:p>", 
   "frac_of": "<text:p text:style-name=\"P5\">{}<text:span text:style-name=\"T1\">{}</text:span>/<text:span text:style-name=\"T7\">{}</text:span><text:span text:style-name=\"T11\"> of </text:span>{} = {}</text:p>", 
   "div": "<text:p text:style-name=\"P4\">{}{} \u00f7 {} = {}</text:p>", 
+  "frac_of_mul": "<text:p text:style-name=\"P5\">{}<text:span text:style-name=\"T1\">{}</text:span>/<text:span text:style-name=\"T7\">{}</text:span><text:span text:style-name=\"T11\"> of </text:span>({} \u00d7 {}) = {}</text:p>", 
+  "mul_power_of": "<text:p text:style-name=\"P4\">{}{} \u00d7 {}<text:span text:style-name=\"T1\">{}</text:span><text:span text:style-name=\"T2\"> = {}</text:span></text:p>", 
   "empty": "<text:p text:style-name=\"P2\"></text:p>"
  }, 
  "lines": {

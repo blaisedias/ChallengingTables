@@ -245,12 +245,13 @@ class FractionOf(SumBase):
     def text(self, sums):
         m1 = self.m[0].select()
         m2 = self.m[1].select_gt_nc(m1)
-        m3 = randint(m2 * 2, m2 * 12)       # FIXME: derive from param
-        while m3 % m2:
-            m3 = randint(m2 * 2, m2 * 12)
-        # randomly multiply by 10
-        if (randint(0, 100) % 2):
-            m3 *= 10
+        # m3 = randint(m2 * 2, m2 * 12)       # FIXME: derive from param
+        # while m3 % m2:
+        #    m3 = randint(m2 * 2, m2 * 12)
+        ## randomly multiply by 10
+        #if (randint(0, 100) % 2):
+        #    m3 *= 10
+        m3 = self.m[2].select_nc() * m2
         if debug:
             print >> sys.stderr, "{}/{} of {}".format(m1, m2, m3)
         a = m1 * m3 * 1.0
@@ -263,6 +264,28 @@ class FractionOf(SumBase):
         return {
             'sum': the_sum,
             'ans': fodt_fmt['frac_of'].format("{}", m1, m2, m3, a)
+        }
+
+
+class FractionOfMul(SumBase):
+
+    def text(self, sums):
+        m1 = self.m[0].select()
+        m2 = self.m[1].select_gt_nc(m1)
+        m3 = self.m[2].select_nc() * m2
+        m4 = self.m[3].select_nc()
+        if debug:
+            print >> sys.stderr, "{}/{} of {} * {}".format(m1, m2, m3, m4)
+        a = m1 * m3 * m4 * 1.0
+        a /= m2
+        a = int(a)
+        the_sum = fodt_fmt['frac_of_mul'].format("{}", m1, m2, m3, m4, '')
+        if the_sum in sums:
+            return self.recurse(sums)
+        sums.append(the_sum)
+        return {
+            'sum': the_sum,
+            'ans': fodt_fmt['frac_of_mul'].format("{}", m1, m2, m3, m4, a)
         }
 
 
@@ -357,6 +380,24 @@ class PowerOf(SumBase):
         }
 
 
+class MulPowerOf(SumBase):
+
+    def text(self, sums):
+        m1 = self.m[0].select()
+        m2 = self.m[1].select()
+        m3 = self.m[2].select_nc()
+        if debug:
+            print >> sys.stderr, "{} {}^{}".format(m1, m2, m3)
+        the_sum = fodt_fmt['mul_power_of'].format("{}", m1, m2, m3, '')
+        if the_sum in sums:
+            return self.recurse(sums)
+        sums.append(the_sum)
+        return {
+            'sum': the_sum,
+            'ans': fodt_fmt['mul_power_of'].format("{}", m1, m2, m3, m1 * int(math.pow(m2, m3))),
+        }
+
+
 class Squared(SumBase):
 
     def text(self, sums):
@@ -431,12 +472,14 @@ def read_spec(spec_name):
         'Multiply3',
         'Divide2',
         'FractionOf',
+        'FractionOfMul',
         'PercentOf',
         'PercentOff',
         'FractionOfFraction',
         'Squared',
         'Cubed',
         'PowerOf',
+        'MulPowerOf',
         'SquareRoot',
         'CubeRoot',
     ]
