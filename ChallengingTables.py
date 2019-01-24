@@ -633,7 +633,7 @@ if __name__ == '__main__':
         for spec in test_spec:
             obj = getattr(thismodule, spec['type'])(*spec['ranges'])
             tests.extend([tst for tst in [obj.text(sums) for i in range(spec['count'])] if tst is not None])
-        tests = sorted(tests)
+        # tests = sorted(tests)
         if options.shuffle:
             random_shuffle(tests)
 
