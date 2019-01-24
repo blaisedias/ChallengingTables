@@ -161,7 +161,7 @@ class SumBase:
                 v = self.text(sums)
             else:
                 self.available = False
-                print >> sys.stderr, "All number combinations have been used up!"
+                print >> sys.stderr, "Ooops! Recursion level limit reached, try again!"
             self.recursion_count -= 1
         return v
 
@@ -176,8 +176,8 @@ class SquareRoot(SumBase):
         sums.append(the_sum)
         return {
             'sum': the_sum,
-            'ans': fodt_fmt['sqrt'].format("{}", m1 ** 2, int(math.sqrt(m1))),
-            'ansonly': fodt_fmt['ansonly'].format("{}", int(math.sqrt(m1))),
+            'ans': fodt_fmt['sqrt'].format("{}", m1 ** 2, m1),
+            'ansonly': fodt_fmt['ansonly'].format("{}", m1),
         }
 
 
