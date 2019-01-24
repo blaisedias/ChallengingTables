@@ -170,13 +170,13 @@ class SquareRoot(SumBase):
 
     def text(self, sums):
         m1 = self.m[0].select()
-        the_sum = fodt_fmt['sqrt'].format("{}", m1, '')
+        the_sum = fodt_fmt['sqrt'].format("{}", m1 ** 2, '')
         if the_sum in sums:
             return self.recurse(sums)
         sums.append(the_sum)
         return {
             'sum': the_sum,
-            'ans': fodt_fmt['sqrt'].format("{}", m1, int(math.sqrt(m1))),
+            'ans': fodt_fmt['sqrt'].format("{}", m1 ** 2, int(math.sqrt(m1))),
             'ansonly': fodt_fmt['ansonly'].format("{}", int(math.sqrt(m1))),
         }
 
